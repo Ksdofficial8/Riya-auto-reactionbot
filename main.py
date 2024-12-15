@@ -45,9 +45,9 @@ logger = getLogger('bot')
 
 TelegramBot = Client(
     name="bot",
-    api_id=Telegram.API_ID,
-    api_hash=Telegram.API_HASH,
-    bot_token=Telegram.BOT_TOKEN
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=BOT_TOKEN
 )
 
 class Telegram:
