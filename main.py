@@ -3,6 +3,8 @@ from pyrogram.types import Message
 from pyrogram.errors import MessageIdInvalid, ChatAdminRequired, EmoticonInvalid, ReactionInvalid 
 from random import choice
 from pyrogram import Client
+from logging import getLogger
+from logging.config import dictConfig
 
 
 LOGGER_CONFIG_JSON = {
