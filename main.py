@@ -9,6 +9,38 @@ from logging import getLogger
 from logging.config import dictConfig
 from os import environ as env
 
+
+
+LOGGER_CONFIG_JSON = {
+    'version': 1,
+    'formatters': {
+        'default': {
+            'format': '[%(asctime)s][%(name)s][%(levelname)s] -> %(message)s',
+            'datefmt': '%d/%m/%Y %H:%M:%S'
+        },
+    },
+    'handlers': {
+        'file_handler': {
+            'class': 'logging.FileHandler',
+            'filename': 'event-log.txt',
+            'formatter': 'default'
+        },
+        'stream_handler': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'default'
+        }
+    },
+    'loggers': {
+        'bot': {
+            'level': 'INFO',
+            'handlers': ['file_handler', 'stream_handler']
+        },
+        'pyrogram': {
+            'level': 'INFO',
+            'handlers': ['file_handler', 'stream_handler']
+        }
+    }
+}
 # Logger Configuration
 dictConfig(LOGGER_CONFIG_JSON)
 
