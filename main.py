@@ -45,8 +45,7 @@ TelegramBot = Client(
     name="bot",
     api_id=Telegram.API_ID,
     api_hash=Telegram.API_HASH,
-    bot_token=Telegram.BOT_TOKEN,
-    plugins={'root': 'bot/plugins'}
+    bot_token=Telegram.BOT_TOKEN
 )
 
 class Telegram:
