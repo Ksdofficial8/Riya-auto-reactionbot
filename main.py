@@ -1,13 +1,10 @@
-from pyrogram import Client, filters
+from pyrogram import filters
 from pyrogram.types import Message
-from pyrogram.errors import MessageIdInvalid, ChatAdminRequired, EmoticonInvalid, ReactionInvalid
+from pyrogram.errors import MessageIdInvalid, ChatAdminRequired, EmoticonInvalid, ReactionInvalid 
 from random import choice
-from bot import TelegramBot, logger
-from bot.config import Telegram
-from logging import getLogger
-from os import environ as env
+from pyrogram import Client
 
-# Logging Configuration
+
 LOGGER_CONFIG_JSON = {
     'version': 1,
     'formatters': {
@@ -39,36 +36,8 @@ LOGGER_CONFIG_JSON = {
     }
 }
 
-# Bot Emoji Reactions
-@TelegramBot.on_message(filters.all)
-async def send_reaction(_, msg: Message):
-    try:
-        # Choose a random emoji and log it for debugging
-        emoji = choice(Telegram.EMOJIS)
-        logger.info(f"Chosen emoji: {emoji}")
-        
-        # React to the message with the chosen emoji
-        await msg.react(emoji)
-    except (MessageIdInvalid, EmoticonInvalid, ChatAdminRequired, ReactionInvalid) as e:
-        logger.error(f"Error reacting to message: {str(e)}")
-        pass
+dictConfig(LOGGER_CONFIG_JSON)
 
-# Telegram Bot Configuration
-class Telegram:
-    API_ID = int(env.get("TG_API_ID", "16457832"))
-    API_HASH = env.get("TG_API_HASH", "3030874d0befdb5d05597deacc3e83ab")
-    BOT_TOKEN = env.get("TG_BOT_TOKEN", "8081146945:AAG-E_dfYgV_reJXx3jSdaGoac-NSfzDZpY")
-    BOT_USERNAME = env.get("TG_BOT_USERNAME", "DrReactBot")
-    EMOJIS = [
-        "👍", "👎", "❤", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢",
-        "🎉", "🤩", "🤮", "💩", "🙏", "👌", "🕊", "🤡", "🥱", "🥴", "😍", "🐳", 
-        "❤‍🔥", "🌚", "🌭", "💯", "🤣", "⚡", "🍌", "🏆", "💔", "🤨", "😐", "🍓", 
-        "🍾", "💋", "🖕", "😈", "😴", "😭", "🤓", "👻", "👨‍💻", "👀", "🎃", "🙈", 
-        "😇", "😨", "🤝", "✍", "🤗", "🫡", "🎅", "🎄", "☃", "💅", "🤪", "🗿", 
-        "🆒", "💘", "🙉", "🦄", "😘", "💊", "🙊", "😎", "👾", "🤷‍♂", "🤷", "🤷‍♀", "😡"
-    ]
-
-# Bot Client Initialization
 version = 0.3
 logger = getLogger('bot')
 
@@ -76,8 +45,49 @@ TelegramBot = Client(
     name="bot",
     api_id=Telegram.API_ID,
     api_hash=Telegram.API_HASH,
-    bot_token=Telegram.BOT_TOKEN
+    bot_token=Telegram.BOT_TOKEN,
+    plugins={'root': 'bot/plugins'}
 )
+
+class Telegram:
+    API_ID = int(env.get("TG_API_ID", "16457832"))
+    API_HASH = env.get("TG_API_HASH", "3030874d0befdb5d05597deacc3e83ab")
+    BOT_TOKEN = env.get("TG_BOT_TOKEN", "7939204796:AAGT3x8mqEKeM1yKIiS36L66P51vJq38Efs")
+    BOT_USERNAME = env.get("TG_BOT_USERNAME", "DrReactBot")
+    EMOJIS = [
+        "👍", "👎", "❤", "🔥", 
+        "🥰", "👏", "😁", "🤔",
+        "🤯", "😱", "🤬", "😢",
+        "🎉", "🤩", "🤮", "💩",
+        "🙏", "👌", "🕊", "🤡",
+        "🥱", "🥴", "😍", "🐳",
+        "❤‍🔥", "🌚", "🌭", "💯",
+        "🤣", "⚡", "🍌", "🏆",
+        "💔", "🤨", "😐", "🍓",
+        "🍾", "💋", "🖕", "😈",
+        "😴", "😭", "🤓", "👻",
+        "👨‍💻", "👀", "🎃", "🙈",
+        "😇", "😨", "🤝", "✍",
+        "🤗", "🫡", "🎅", "🎄",
+        "☃", "💅", "🤪", "🗿",
+        "🆒", "💘", "🙉", "🦄",
+        "😘", "💊", "🙊", "😎",
+        "👾", "🤷‍♂", "🤷", "🤷‍♀",
+        "😡"
+    ]
+
+
+@TelegramBot.on_message(filters.all)
+async def send_reaction(_, msg: Message):
+    try:
+        await msg.react(choice(Telegram.EMOJIS))
+    except (
+        MessageIdInvalid,
+        EmoticonInvalid,
+        ChatAdminRequired,
+        ReactionInvalid
+    ):
+        pass
 
 if __name__ == '__main__':
     logger.info('Initializing...')
