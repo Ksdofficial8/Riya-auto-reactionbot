@@ -49,7 +49,7 @@ async def send_reaction(_, msg: Message):
 class Telegram:
     API_ID = int(env.get("TG_API_ID", "16457832"))
     API_HASH = env.get("TG_API_HASH", "3030874d0befdb5d05597deacc3e83ab")
-    BOT_TOKEN = env.get("TG_BOT_TOKEN", "7939204796:AAGT3x8mqEKeM1yKIiS36L66P51vJq38Efs")
+    BOT_TOKEN = env.get("TG_BOT_TOKEN", "8081146945:AAG-E_dfYgV_reJXx3jSdaGoac-NSfzDZpY")
     BOT_USERNAME = env.get("TG_BOT_USERNAME", "DrReactBot")
     EMOJIS = [
         "👍", "👎", "❤", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢",
