@@ -89,13 +89,13 @@ def set_reaction_status(enabled: bool):
 @TelegramBot.on_message(filters.command("reaction on"))
 async def reaction_on(_, msg: Message):
     set_reaction_status(True)
-    await msg.reply("𓌉◯𓇋 Rᴇᴀᴄᴛɪᴏɴ ᴍᴏᴅᴇ ᴀᴄᴛɪᴠɪᴛᴇᴅ ✅")
+    await msg.reply("𓌉◯𓇋 Rᴇᴀᴄᴛɪᴏɴ ᴍᴏᴅᴇ ᴀᴄᴛɪᴠɪᴛᴇᴅ ☑")
 
 # Command to turn reactions off
 @TelegramBot.on_message(filters.command("reaction off"))
 async def reaction_off(_, msg: Message):
     set_reaction_status(False)
-    await msg.reply("𓌉◯𓇋 Rᴇᴀᴄᴛɪᴏɴ ᴍᴏᴅᴇ ᴅᴇᴀᴄᴛɪᴠɪᴛᴇᴅ ❌")
+    await msg.reply("𓌉◯𓇋 Rᴇᴀᴄᴛɪᴏɴ ᴍᴏᴅᴇ ᴅᴇᴀᴄᴛɪᴠɪᴛᴇᴅ ☒")
 
 # Command to guide the user when they enter `/reaction` and show current status
 @TelegramBot.on_message(filters.command("reaction"))
@@ -103,7 +103,7 @@ async def guide_reaction(_, msg: Message):
     # Get the current reaction status
     status = get_reaction_status()
     status_message = "enabled" if status else "disabled"
-    await msg.reply(f"Reactions are currently {status_message}.\n\nTo enable reactions, type `/reaction on`. To disable reactions, type `/reaction off`.")
+    await msg.reply(f"⑈ Rᴇᴀᴄᴛɪᴏɴs ᴀʀᴇ ᴄᴜʀʀᴇɴᴛʟʏ ↳{status_message}.\n\n➥ /reaction `on` - To ᴇɴᴀʙʟᴇ ʀᴇᴀᴄᴛɪᴏɴs\n➥ /reaction `off` - Tᴏ ᴅɪsᴀʙʟᴇ ʀᴇᴀᴄᴛɪᴏɴs")
 
 # Define message reaction logic
 @TelegramBot.on_message(filters.all)
