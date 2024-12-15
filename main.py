@@ -48,7 +48,7 @@ logger = getLogger('bot')
 # Set your environment variables here or load them from your system's environment
 API_ID = int(os.getenv("TG_API_ID", "16457832"))
 API_HASH = os.getenv("TG_API_HASH", "3030874d0befdb5d05597deacc3e83ab")
-BOT_TOKEN = os.getenv("TG_BOT_TOKEN", "8081146945:AAG-E_dfYgV_reJXx3jSdaGoac-NSfzDZpY")
+BOT_TOKEN = os.getenv("TG_BOT_TOKEN", "7638229482:AAECDi3SkCa9KTE-YaC3B5fzJ7a9HL6IYEU")
 BOT_USERNAME = os.getenv("TG_BOT_USERNAME", "DrReactBot")
 
 # List of emojis
