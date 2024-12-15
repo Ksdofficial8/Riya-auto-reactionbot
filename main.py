@@ -1,5 +1,5 @@
 from pyrogram import Client, filters
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types import Message
 from pyrogram.errors import MessageIdInvalid, ChatAdminRequired, EmoticonInvalid, ReactionInvalid
 from random import choice
 from bot import TelegramBot, logger
@@ -7,6 +7,7 @@ from bot.config import Telegram
 from logging import getLogger
 from os import environ as env
 
+# Logging Configuration
 LOGGER_CONFIG_JSON = {
     'version': 1,
     'formatters': {
@@ -38,11 +39,18 @@ LOGGER_CONFIG_JSON = {
     }
 }
 
+# Bot Emoji Reactions
 @TelegramBot.on_message(filters.all)
 async def send_reaction(_, msg: Message):
     try:
-        await msg.react(choice(Telegram.EMOJIS))
-    except (MessageIdInvalid, EmoticonInvalid, ChatAdminRequired, ReactionInvalid):
+        # Choose a random emoji and log it for debugging
+        emoji = choice(Telegram.EMOJIS)
+        logger.info(f"Chosen emoji: {emoji}")
+        
+        # React to the message with the chosen emoji
+        await msg.react(emoji)
+    except (MessageIdInvalid, EmoticonInvalid, ChatAdminRequired, ReactionInvalid) as e:
+        logger.error(f"Error reacting to message: {str(e)}")
         pass
 
 # Telegram Bot Configuration
